@@ -14,7 +14,7 @@
           <label class="label">
             <span class="label-text">Password</span>
           </label> 
-          <input v-model="user.password" type="text" placeholder="password" class="input input-bordered"> 
+          <input v-model="user.password" type="password" placeholder="password" class="input input-bordered"> 
           <label class="label">
             <a href="#" class="label-text-alt">Forgot password?</a>
           </label>
@@ -40,9 +40,9 @@ export default {
   methods: {
     logIn: function() {
       this.$store.dispatch('auth/login', this.user)
-      .then(
-        this.$router.push('/')
-      )
+      .then(() => {
+        this.$router.push('/') 
+      })
       .catch(() => {
         console.log("Some error ocurred")
       })

@@ -19,16 +19,19 @@
             </div>
         </div> 
         <div class="flex-none">
-            <button class="btn btn-outline" @click="logOut">
+            <button class="btn btn-outline" v-if="logged" @click="logOut">
                 Logout
             </button>
+            <router-link to="/login" class="btn btn-outline" v-else>
+                Login
+            </router-link>
         </div> 
-        <div class="flex-none" v-if="this.$store.state.auth.loggedIn">
-        <router-link to="/search" class="btn btn-square btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">             
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>             
-            </svg>
-        </router-link>
+        <div class="flex-none" v-if="logged">
+            <router-link to="/search" class="btn btn-square btn-ghost">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">             
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>             
+                </svg>
+            </router-link>
         </div>
     </div>
 </template>
@@ -36,6 +39,11 @@
 <script>
 export default {
     name: 'Header',
+    data: function() {
+        return {
+            logged: this.$store.state.auth.status.loggedIn,
+        }
+    },
     methods: {
         logOut: function() {
             this.$store.dispatch('auth/logout')
