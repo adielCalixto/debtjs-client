@@ -6,6 +6,7 @@ var token = window.localStorage.getItem("AUTH_BEARER")
 
 try {
   var payload = jwt_decode(token)
+  axios.defaults.headers.common['Authorization'] = token;
 } catch(err) {
   token = null
   AuthService.logout()
@@ -23,7 +24,7 @@ export const auth = {
         return AuthService.login(user)
         .then(token => {
           commit('loginSuccess', token);
-          axios.defaults.headers['Authorization'] = token;
+          axios.defaults.headers.common['Authorization'] = token;
           return Promise.resolve(token);
         })
         .catch(error => {
