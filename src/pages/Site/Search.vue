@@ -20,7 +20,7 @@
                             <p class="text-xl">{{ pessoa.nome }}</p>
                             <p class="text-md">{{ pessoa.telefone }}</p>
                         </div>
-                        <router-link class="btn btn-success" v-bind:to="'/person/' + pessoa.pessoa_id">Perfil</router-link>
+                        <router-link class="btn btn-success" v-bind:to="'/a/person/' + pessoa.pessoa_id">Perfil</router-link>
                     </div>
                 </div>
                 <div class="modal-action">

@@ -49,7 +49,9 @@ export default {
     inject: ['$axios'],
     data: function() {
         return {
-            person: {},
+            person: {
+                dividas: [],
+            },
         }
     },
     methods: {

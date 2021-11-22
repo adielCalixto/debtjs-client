@@ -1,6 +1,23 @@
 <template>
-  <Header />
-  <div class="hero min-h-screen bg-base-200">
+  <Header>
+    <template v-slot:links>
+      <router-link to="/" class="btn btn-ghost btn-sm rounded-btn">
+        Home
+      </router-link>
+      <router-link to="/about" class="btn btn-ghost btn-sm rounded-btn">
+        Sobre
+      </router-link> 
+      <router-link to="/contact" class="btn btn-ghost btn-sm rounded-btn">
+        Contato
+      </router-link>
+    </template>
+    <template v-slot:logged>
+      <router-link to="/a" class="btn btn-primary btn-outline">
+        Dashboard
+      </router-link>
+    </template>
+  </Header>
+  <div class="hero min-h-screen bg-base-300">
     <div class="flex-col justify-center hero-content lg:flex-row">
       <div class="text-center lg:text-left">
         <h1 class="mb-5 text-5xl font-bold">
