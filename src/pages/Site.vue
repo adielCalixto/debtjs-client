@@ -11,7 +11,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 export default {
-  name: 'Home',
+  name: 'Site',
   components: {
     Header,
     Footer,

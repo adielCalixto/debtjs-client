@@ -1,34 +1,38 @@
 const routes = [
 {
-    path: '/',
-    component: () => import('@/pages/Web'),
+    path: '/a',
+    component: () => import('@/pages/Site.vue'),
     children: [
-    {
-        path: '/',
-        component: () => import('@/pages/Web/Home')
-    },
-    {
-        path: '/person/:person_id',
-        component: () => import('@/pages/Web/Person')
-    },
-    {
-        path: '/search',
-        component: () => import('@/pages/Web/Search')
-    },
-    {
-        path: '/debt',
-        component: () => import('@/pages/Web/Debt')
-    },
+        {
+            path: '/a/person/:id(\\d+)',
+            component: () => import('@/pages/Site/Person.vue')
+        },
+        {
+            path: '/a/search',
+            component: () => import('@/pages/Site/Search.vue')
+        },
+        {
+            path: '/a/debt',
+            component: () => import('@/pages/Site/Debt.vue')
+        },
     ]
 },
 {
+    path: '/',
+    component: () => import('@/pages/Home.vue'),
+},
+{
     path: '/login',
-    component: () => import('@/pages/Login')
+    component: () => import('@/pages/Login.vue')
 },
 {
     path: '/error',
-    component: () => import('@/pages/Error')
+    component: () => import('@/pages/Error.vue')
 },
+{
+    path: '/:pathMatch(.*)',
+    redirect: '/error'
+}
 ]
 
 export default routes

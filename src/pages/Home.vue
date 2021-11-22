@@ -1,4 +1,5 @@
 <template>
+  <Header />
   <div class="hero min-h-screen bg-base-200">
     <div class="flex-col justify-center hero-content lg:flex-row">
       <div class="text-center lg:text-left">
@@ -24,7 +25,7 @@
             <label class="label">
               <span class="label-text">Password</span>
             </label> 
-            <input v-model="user.password" type="text" placeholder="password" class="input input-bordered"> 
+            <input v-model="user.password" type="password" placeholder="password" class="input input-bordered"> 
             <label class="label">
               <a href="#" class="label-text-alt">Forgot password?</a>
             </label>
@@ -36,9 +37,13 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
+
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 export default {
   name: 'Home',
@@ -50,11 +55,15 @@ export default {
       }
     }
   },
+  components: {
+    Header, 
+    Footer
+  },
   methods: {
     logIn: function() {
       this.$store.dispatch('auth/login', this.user)
       .then(() => {
-        this.$router.push('/search')
+        this.$router.push('/a/search')
       })
       .catch(err => {
         console.log(err)

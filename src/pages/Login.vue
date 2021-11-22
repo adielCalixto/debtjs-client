@@ -41,7 +41,7 @@ export default {
     logIn: function() {
       this.$store.dispatch('auth/login', this.user)
       .then(() => {
-        this.$router.push('/') 
+        this.$router.push('/a/search') 
       })
       .catch(() => {
         console.log("Some error ocurred")
