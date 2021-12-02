@@ -96,7 +96,7 @@ export default {
         getUser: function() {
             this.$axios.get(`/pessoas/${this.pessoa.cpf}/cpf`)
             .then(result => {
-                if(result.data) {
+                if(result.data != '') {
                     this.pessoa = result.data
                     this.sendDebt()
                 } else {
@@ -113,6 +113,7 @@ export default {
                 if(result.data) {
                     console.log(result.data)
                 }
+                console.log(result)
             })
             .catch(() => {
                 console.log('error ocurred')
