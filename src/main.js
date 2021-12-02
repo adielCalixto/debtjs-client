@@ -1,7 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import axios from './services/axios'
 import store from './store'
+import axios from './services/axios'
+import './services/vee'
 import './assets/tailwind.css'
 
 import router from './router'

@@ -1,5 +1,10 @@
 @tailwind base;
-
 @tailwind components;
-
 @tailwind utilities;
+
+@layer utilities {
+    .error {
+        @apply text-xs;
+        @apply text-gray-400;
+    }
+}

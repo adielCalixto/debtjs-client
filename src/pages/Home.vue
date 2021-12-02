@@ -32,24 +32,27 @@
           <div class="card-title"> 
             Já tem uma conta?
           </div>
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">Email</span>
-            </label> 
-            <input v-model="user.email" type="text" placeholder="email" class="input input-bordered">
-          </div> 
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">Password</span>
-            </label> 
-            <input v-model="user.password" type="password" placeholder="password" class="input input-bordered"> 
-            <label class="label">
-              <a href="#" class="label-text-alt">Forgot password?</a>
-            </label>
-          </div> 
-          <div class="form-control mt-6">
-            <input @click="logIn" type="button" value="Login" class="btn btn-primary">
-          </div>
+          <Form @submit="logIn">
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Email</span>
+              </label> 
+              <Field type="email" name="email" rules="email" class="input input-bordered" />
+              <ErrorMessage name="email" class="error" />
+            </div> 
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Password</span>
+              </label> 
+              <Field type="password" name="password" rules="required" class="input input-bordered" />
+              <ErrorMessage name="password" class="error" />
+            </div> 
+            <div class="form-control mt-6">
+              <button type="submit" class="btn btn-primary">
+                Enviar
+              </button>
+            </div>
+          </Form>
         </div>
       </div>
     </div>
@@ -61,24 +64,24 @@
 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { Form, Field, ErrorMessage } from 'vee-validate';
 
 export default {
   name: 'Home',
   data: function() {
     return {
-      user: {
-        email: '',
-        password: '',
-      }
     }
   },
   components: {
     Header, 
-    Footer
+    Footer,
+    Form,
+    Field,
+    ErrorMessage,
   },
   methods: {
-    logIn: function() {
-      this.$store.dispatch('auth/login', this.user)
+    logIn: function(values) {
+      this.$store.dispatch('auth/login', values)
       .then(() => {
         this.$router.push('/a/search')
       })
