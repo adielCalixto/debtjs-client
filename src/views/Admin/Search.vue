@@ -16,26 +16,28 @@
     </div>
 
     <div>
-        <div class="modal" v-if="query" v-bind:class="{ 'modal-open': modalOpen }">
+        <div class="modal" v-bind:class="{ 'modal-open': modalOpen }">
             <div class="modal-box">
-                <div>
-                    <div class="shadow-lg rounded p-3 flex justify-between" v-for="item of query" v-bind:key="item[0]">
-                        <div v-if="item.divida_id">
-                            <div class="text-base-content">
-                                <p class="text-xl">{{ item.valor }}</p>
-                            </div>
-                            <router-link class="btn btn-success" v-bind:to="'/a/person/'+item.pessoa_id">Perfil</router-link>
+                <div v-if="items.length > 0">
+                    <div class="shadow-lg rounded p-4 mb-4 flex justify-between" v-for="item of items" v-bind:key="item[0]">
+                        <div class="text-base-content">
+                            <p class="text-xl border-b-2 border-neutral">{{ item.nome }}</p>
                         </div>
-                        <div v-else-if="item.pessoa_id">
-                            <div class="text-base-content">
-                                <p class="text-xl">{{ item.nome }}</p>
-                            </div>
-                            <router-link class="btn btn-success" v-bind:to="'/a/person/'+item.pessoa_id">Perfil</router-link>
+                        <router-link class="btn btn-outline btn-sm" v-bind:to="'/a/person/'+item.pessoa_id">Perfil</router-link>
+                    </div>
+                </div>
+                <div v-else>                    
+                    <div class="alert alert-warning">
+                        <div class="flex-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 mx-2 stroke-current"> 
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>                         
+                            </svg> 
+                            <label>Nenhum resultado encontrado!</label>
                         </div>
                     </div>
                 </div>
                 <div class="modal-action">
-                    <button @click="modalOpen=false" class="btn">Close</button>
+                    <button @click="modalOpen=false" class="btn btn-error btn-square">X</button>
                 </div>
             </div>
         </div>
@@ -85,7 +87,7 @@ export default {
                 filter: '',
             },
             modalOpen: false,
-            query: [],
+            items: [],
             menu: [
                 {
                     title: 'Pessoas',
@@ -101,16 +103,6 @@ export default {
                         },
                     ]
                 },
-                {
-                    title: 'Dividas',
-                    api: 'dividas',
-                    submenu: [
-                        {
-                            title: 'Valor',
-                            filter: 'valor'
-                        },
-                    ]
-                }
             ],
             active: '',
         }
@@ -127,10 +119,10 @@ export default {
                     this.modalOpen = true;
 
                     if(Array.isArray(response.data)) {
-                        return this.query = response.data
+                        return this.items = response.data
                     }
 
-                    return this.query = [response.data]
+                    return this.items = [response.data]
                 }
             })
         }
