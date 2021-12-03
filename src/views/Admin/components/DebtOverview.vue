@@ -1,27 +1,29 @@
 <template>
   <OverviewPanel>
     <template v-slot:header>
-        <span class="text text-5xl">
-            💰
-        </span>
+        <div class="mr-4">
+            <unicon name="bill" width="70" height="70" />
+        </div>
         <div>
-        <h3 class="text-base-content text-xl text-bold">
-            Dividas
-        </h3>
-        <p class="text-md">Gerencie as dividas</p>
+            <h3 class="text-base-content text-xl text-bold">
+                Dividas
+            </h3>
+            <p class="text-md">Gerencie as dividas</p>
         </div>
     </template>
 
     <template v-slot:actions>
-        <button @click="getAll" class="btn btn-outline mr-2">Refresh</button>
-        <button @click="$emit('openModal')" class="btn btn-success">+ New Debt</button>
+        <button @click="getAll" class="btn btn-outline btn-square mr-2"><unicon name="sync" /></button>
+        <button @click="$emit('openModal')" class="btn btn-success"><unicon name="plus" fill="#fff" /> New Debt</button>
     </template>
 
     <template v-slot:filters>
         <Form v-slot="{ handleSubmit }" class="flex gap-4 mb-4">
             <div class="form-control flex-1">
                 <label class="input-group">
-                    <span>🔍</span>
+                    <span>
+                        <unicon name="search" />
+                    </span>
                     <Field @change="handleSubmit($event, getFiltered)" type="text" placeholder="Digite o valor..." name="valor" class="input flex-1 input-bordered" />
                 </label>
             </div>
@@ -62,7 +64,9 @@
                 <td>{{ debt.divida_id }}</td>
                 <td>{{ debt.valor }}</td>
                 <td>{{ debt.status }}</td>
-                <td>{{ debt.pessoa_id }}</td>
+                <td>
+                    <router-link :to="'/a/person/'+debt.pessoa_id"><unicon name="external-link-alt" /></router-link>
+                </td>
                 <td>{{ debt.usuario_id }}</td>
                 <td>{{ debt.createdAt }}</td>
             </tr>

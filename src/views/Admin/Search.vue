@@ -8,7 +8,7 @@
                 <Form @submit="searchMethod" class="relative">
                     <Field type="text" name="value" rules="required" class="w-full pr-16 input input-ghost input-bordered" />
                     <ErrorMessage name="value" class="error" />
-                    <button type="submit" class="absolute top-0 right-0 rounded-l-none btn btn-neutral">🔍</button>
+                    <button type="submit" class="absolute top-0 right-0 rounded-l-none btn btn-neutral"><unicon name="search" fill="#fff" /></button>
                 </Form>
             </div>
             <img class="max-w-sm absolute" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.icon-icons.com%2Ficons2%2F1852%2FPNG%2F512%2Ficonfinder-server2-4417099_116631.png&f=1&nofb=1" />
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="modal-action">
-                    <button @click="modalOpen=false" class="btn btn-error btn-square">X</button>
+                    <button @click="modalOpen=false" class="btn btn-error btn-square"><unicon name="times" /></button>
                 </div>
             </div>
         </div>
@@ -46,19 +46,17 @@
     <FolderMenu class="absolute top-20 left-0">
         <template v-slot:items>
             <div v-for="item of menu" v-bind:key="item.title">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 mr-2 stroke-current">          
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>                
-                    </svg>
-                    {{ item.title }}
-                </span>
+                <div class="flex">
+                    <unicon name="folder" />
+                    <p>{{ item.title }}</p>
+                </div>
                 <ul>
                     <li v-for="subitem of item.submenu" v-bind:key="subitem.title" v-bind:class="{bordered: active == (item.title+subitem.title)}">
                         <a @click="search.api = item.api, search.filter = subitem.filter, active = (item.title+subitem.title)">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 mr-2 stroke-current">       
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>                   
-                            </svg>
-                            {{ subitem.title }}
+                            <div class="flex">
+                                <unicon name="angle-right" />
+                                <p>{{ subitem.title }}</p>
+                            </div>
                         </a>
                     </li>
                 </ul>
