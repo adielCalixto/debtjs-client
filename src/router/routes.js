@@ -1,33 +1,33 @@
 const routes = [
 {
+    path: '/',
+    component: () => import('@/views/Index/Index.vue'),
+},
+{
     path: '/a',
-    component: () => import('@/pages/Site.vue'),
+    component: () => import('@/views/Admin/Admin.vue'),
     children: [
         {
             path: '/a/person/:id(\\d+)',
-            component: () => import('@/pages/Site/Person.vue')
+            component: () => import('@/views/Admin/Person.vue')
         },
         {
             path: '/a/search',
-            component: () => import('@/pages/Site/Search.vue')
+            component: () => import('@/views/Admin/Search.vue')
         },
         {
             path: '/a/debt',
-            component: () => import('@/pages/Site/Debt.vue')
+            component: () => import('@/views/Admin/Debt.vue')
         },
     ]
 },
 {
-    path: '/',
-    component: () => import('@/pages/Home.vue'),
-},
-{
     path: '/login',
-    component: () => import('@/pages/Login.vue')
+    component: () => import('@/views/Auth/Login.vue')
 },
 {
     path: '/error',
-    component: () => import('@/pages/Error.vue')
+    component: () => import('@/views/Error/Error.vue')
 },
 {
     path: '/:pathMatch(.*)',
