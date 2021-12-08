@@ -7,4 +7,14 @@
         @apply text-xs;
         @apply text-gray-400;
     }
+
+    .container {
+        @apply artboard;
+        @apply max-w-7xl;
+        @apply mx-auto;
+        @apply shadow-md;
+        @apply my-8;
+        @apply p-4;
+        @apply bg-base-100;
+    }
 }

@@ -1,59 +1,51 @@
 <template>
-  <div class="p-4 max-w-5xl mx-auto">
-      <div class="bg-neutral rounded text-neutral-content shadow-lg p-3 mb-3">
-        <p>{{ person.nome }}</p>
-        <p>{{ person.cpf }}</p>
-        <p>{{ person.telefone }}</p>
-        <p>{{ person.email }}</p>
-      </div>
-
-      <div v-if="person.dividas.length > 0" class="bg-base text-base-content shadow-lg p-3">
-          <div>
-            Dividas:
-          </div>
-          <div class="overflow-x-auto">
-            <table class="table w-full">
-                <thead>
-                <tr>
-                    <th>Id</th> 
-                    <th>Valor</th> 
-                    <th>Status</th> 
-                    <th>Cadastrante</th>
-                </tr>
-                </thead> 
-                <tbody>
-                <tr v-for="divida of person.dividas" v-bind:key="divida.divida_id">
-                    <th>{{ divida.divida_id }}</th> 
-                    <td>{{ divida.valor }}</td> 
-                    <td>{{ divida.status }}</td> 
-                    <td>{{ divida.usuario_id }}</td>
-                </tr>
-                </tbody>
-            </table>
+  <div class="container">
+        <div class="flex items-center p-4">
+            <unicon name="user" width="30" height="30" />
+            <h2 class="ml-4 text-3xl text-base-content">{{ person.nome }}</h2>
         </div>
-    </div>
-    <div v-else class="alert alert-success">
-        <div class="flex-1">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 mx-2 stroke-current">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>                          
-            </svg> 
-            <label>Não há dívidas</label>
+        <div class="mr-4 p-4 bg-base-200 flex border-2" style="min-height: 31.25rem;">
+            <div class="w-1/4">
+                <div class="bg-base-300 p-4">
+                    <h3 class="text-xl text-base-content">Account</h3>
+                </div>
+            </div>
+            <div class="flex-1">
+                <div class="tabs border-2 p-2 mb-8">
+                    <a @click="onTab = 0" :class="{ 'tab-active': onTab == 0 }" class="tab tab-lifted">Detalhes da conta</a> 
+                    <a @click="onTab = 1" :class="{ 'tab-active': onTab == 1 }" class="tab tab-lifted">Dívidas</a> 
+                    <a @click="onTab = 2" :class="{ 'tab-active': onTab == 2 }" class="tab tab-lifted">Ações</a>
+                </div>
+                <div>
+                    <PersonInfo v-if="onTab === 0" :person="person" />
+                    <PersonDebts v-if="onTab === 1" :debts="person.dividas" @update="getPerson" />
+                    <PersonActions v-if="onTab === 2" @update="getPerson" />
+                </div>
+            </div>
         </div>
-    </div>
   </div>
 </template>
 
 <script>
+import PersonActions from './components/PersonActions'
+import PersonDebts from './components/PersonDebts'
+import PersonInfo from './components/PersonInfo'
+
 export default {
     name: 'Person',
-    inject: ['$axios'],
     data: function() {
         return {
+            onTab: 0,
             person: {
-                dividas: [],
             },
         }
     },
+    components: {
+        PersonInfo,
+        PersonDebts,
+        PersonActions,
+    },
+    inject: ['$axios'],
     methods: {
         getPerson: function() {
             this.$axios.get(`/pessoas/${this.$route.params.id}/dividas`)

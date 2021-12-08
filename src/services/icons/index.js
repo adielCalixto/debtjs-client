@@ -1,4 +1,4 @@
 import Unicon from 'vue-unicons'
-import { uniExternalLinkAlt, uniUser, uniSearch, uniBill, uniTimes, uniFolder, uniFolderSlash, uniFolderOpen, uniAngleRight, uniPlus, uniSync } from 'vue-unicons/dist/icons'
+import { uniCheck, uniExternalLinkAlt, uniUser, uniSearch, uniBill, uniTimes, uniFolder, uniFolderSlash, uniFolderOpen, uniAngleRight, uniPlus, uniSync, uniTrash } from 'vue-unicons/dist/icons'
 
-Unicon.add([uniExternalLinkAlt, uniUser, uniSearch, uniBill, uniFolder, uniTimes, uniFolderSlash, uniFolderOpen, uniAngleRight, uniPlus, uniSync])
+Unicon.add([uniCheck, uniExternalLinkAlt, uniUser, uniSearch, uniBill, uniFolder, uniTimes, uniFolderSlash, uniFolderOpen, uniAngleRight, uniPlus, uniSync, uniTrash])
