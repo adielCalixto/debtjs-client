@@ -18,7 +18,7 @@
     </template>
 
     <template v-slot:filters>
-        <Form v-slot="{ handleSubmit }" class="flex gap-4 mb-4">
+        <Form @submit.stop v-slot="{ handleSubmit }" class="flex gap-4 mb-4">
             <div class="form-control flex-1">
                 <label class="input-group">
                     <span>
