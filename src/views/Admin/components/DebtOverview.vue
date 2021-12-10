@@ -77,6 +77,7 @@
 
 <script>
 import OverviewPanel from '@/components/OverviewPanel'
+import buildQuery from '@/utils/buildQuery'
 import { Form, Field } from 'vee-validate'
 
 export default {
@@ -98,12 +99,9 @@ export default {
     inject: ['$axios'],
     methods: {
         getFiltered: function(values) {
-            var esc = encodeURIComponent;
-            var query = Object.keys(values)
-                .map(k => esc(k) + '=' + (values[k] ? esc(values[k]) : ''))
-                .join('&');
+            const query = buildQuery(values)
 
-            this.$axios.get(`/dividas?${query}&limit=${this.query.limit}&offset=${this.query.offset}`)
+            this.$axios.get(`/dividas?${query}&limit=${this.query.limit}&offset=${this.query.offset}&groupby=created_at`)
             .then(response => {
                 if(response.data) {
                     this.debts = response.data
@@ -117,7 +115,7 @@ export default {
             })
         },
         getAll: function() {
-            this.$axios.get(`/dividas?limit=${this.query.limit}&offset=${this.query.offset}`)
+            this.$axios.get(`/dividas?limit=${this.query.limit}&offset=${this.query.offset}&groupby=created_at`)
             .then(response => {
                 if(response.data) {
                     this.debts = response.data

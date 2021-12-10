@@ -67,6 +67,7 @@
 
 <script>
 import FolderMenu from '@/components/FolderMenu'
+import buildQuery from '@/utils/buildQuery'
 import { Form, Field, ErrorMessage } from 'vee-validate'
 
 export default {
@@ -110,8 +111,9 @@ export default {
             if(!this.active) {
                 return;
             }
+            const query = buildQuery({ [this.search.filter]: value })
 
-            this.$axios.get(`/${this.search.api}/${value}/${this.search.filter}`)
+            this.$axios.get(`/${this.search.api}/?${query}`)
             .then(response => {
                 if(response.data) {
                     this.modalOpen = true;

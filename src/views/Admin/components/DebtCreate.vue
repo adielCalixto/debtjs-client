@@ -10,7 +10,7 @@
                             <span class="label-text">CPF</span>
                         </label> 
 
-                        <Field type="text" name="cpf" rules="required" v-model="formData.cpf" class="input input-bordered" />
+                        <Field type="text" name="cpf" rules="cpf|required" v-model="formData.cpf" class="input input-bordered" />
                         <ErrorMessage name="cpf" class="error" />
                     </div> 
                     <div class="form-control">
@@ -41,7 +41,7 @@
                             <span class="label-text">CPF</span>
                         </label> 
 
-                        <Field type="text" name="cpf" rules="required" v-model="formData.cpf" class="input input-bordered" />
+                        <Field type="text" name="cpf" rules="cpf|required" v-model="formData.cpf" class="input input-bordered" />
                         <ErrorMessage name="cpf" class="error" />
                     </div> 
                     <div class="form-control">
@@ -144,10 +144,10 @@ export default {
             }
         },
         getPessoa: function({ cpf }) {
-            return this.$axios.get(`/pessoas/${cpf}/cpf`, { cpf })
+            return this.$axios.get(`/pessoas/?cpf=${cpf}`)
             .then(response => {
-                if(response.data) {
-                    return Promise.resolve(response.data)
+                if(response.data.length > 0) {
+                    return Promise.resolve(response.data[0])
                 }
                 return Promise.resolve(false)
             })
